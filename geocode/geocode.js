@@ -1,10 +1,12 @@
 const request = require('request');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const geocodeAddress = (address, callback) => {
   const encodedAddress = encodeURIComponent(address);
 
   request({
-    url: `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=AIzaSyCD2Ue21yIN0kFflLE1ziDk20b4oaQdIMk`,
+    url: `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${process.env.GMAPS_KEY}`,
     json: true
   }, (error, response, body) => {
     if (error) {
