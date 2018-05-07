@@ -1,5 +1,6 @@
 const yargs = require('yargs');
 const axios = require('axios');
+const dotenv = require('dotenv');
 const argv = yargs
   .options({
     a: {
@@ -12,9 +13,10 @@ const argv = yargs
   .help()
   .alias('help', 'h')
   .argv;
+dotenv.config();
 
 const encodedAddress = encodeURIComponent(argv.address);
-const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=AIzaSyCD2Ue21yIN0kFflLE1ziDk20b4oaQdIMk`;
+const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${process.env.GMAPS_KEY}`;
 
 axios.get(geocodeUrl)
   .then((res) => {
@@ -24,7 +26,7 @@ axios.get(geocodeUrl)
 
     var lat = res.data.results[0].geometry.location.lat;
     var lng = res.data.results[0].geometry.location.lng;
-    var weatherUrl = `https://api.darksky.net/forecast/d1d929a6d3f6402146b41ecc2e84a611/${lat},${lng}`;
+    var weatherUrl = `https://api.darksky.net/forecast/${process.env.FORECAST_KEY}/${lat},${lng}`;
     return axios.get(weatherUrl);
   })
   .then((res) => {
