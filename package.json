@@ -2,11 +2,11 @@
   "name": "weather-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": ""
   },
-  "author": "",
+  "author": "Andrew Wijaya <jun.quan.mail@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
